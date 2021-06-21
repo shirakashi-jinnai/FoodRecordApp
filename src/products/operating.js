@@ -1,5 +1,5 @@
 import { push } from "connected-react-router";
-import { db, FirebaseTimestamp } from "../firebase"
+import { db, FirebaseTimestamp, firestore } from "../firebase"
 import { deleteProductAction, fetchProductAction, resetProduct, updateProduct } from "./actions";
 
 const productsrRef = db.collection('products');
@@ -97,5 +97,15 @@ export const searchProduct = (keyword) => {//検索機能
         console.log(updateList)
         dispatch(updateProduct(updateList))
         // filterList(keyword)
+    }
+}
+
+export const addComment = (id, contributor, rating, title, review) => {
+    return async (dispatch) => {
+        console.log(contributor)
+        const commentRef = productsrRef.doc(id);
+        commentRef.update({
+            comments: firestore.FieldValue.arrayUnion({ contributor: contributor, rating: rating, title: title, review: review })
+        })
     }
 }

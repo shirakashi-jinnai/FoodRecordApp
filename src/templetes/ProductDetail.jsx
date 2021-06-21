@@ -36,8 +36,7 @@ const useStyles = makeStyles(theme => ({
 const ProductDetail = () => {
     const classes = useStyles();
     let id = window.location.pathname.split('/product/detail/')[1]
-
-    const [product, setProduct] = useState();
+    const [product, setProduct] = useState('');
 
     useEffect(() => {
         if (id) {

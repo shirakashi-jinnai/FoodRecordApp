@@ -2,7 +2,6 @@ import { IconButton } from '@material-ui/core';
 import { Favorite, Share } from '@material-ui/icons';
 import React from 'react';
 import Swiper from 'react-id-swiper';
-// import 'swiper/css/swiper.css'
 
 
 

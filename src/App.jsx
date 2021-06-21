@@ -5,6 +5,7 @@ import Signup from './templetes/Signup';
 import Test from './templetes/Test';
 import './asetts/reset.css'
 import './asetts/style.css'
+import './asetts/swiper.css'
 import { Header } from './components/Header';
 
 

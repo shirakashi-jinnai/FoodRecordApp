@@ -1,5 +1,6 @@
 export { default as CommentArea } from './CommentArea'
 export { default as CommentModal } from './CommentModal'
+export { default as CommentPreview } from './CommentPreview'
 export { default as FavoriteListItem } from './FavoriteListItem'
 export { default as ImageArea } from './ImageArea'
 export { default as ImageSwiper } from './ImageSwiper'
