@@ -30,7 +30,7 @@ const HeaderDrawer = (props) => {
     ]
 
     useEffect(() => {
-        db.collection('categories').get().then(snapshots => {
+        db.collection('categories').orderBy('order','asc').get().then(snapshots => {
             const list = [];
             snapshots.forEach(snapshot => {
                 const data = snapshot.data()

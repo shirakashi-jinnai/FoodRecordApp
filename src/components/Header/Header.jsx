@@ -82,7 +82,7 @@ const Header = () => {
                     <IconButton onClick={() => dispatch(push('/favorite'))}>
                         <Favorite />
                     </IconButton>
-                    <IconButton>
+                    <IconButton onClick={() => dispatch(push('/profileedit'))}>
                         <AccountCircle />
                     </IconButton>
                 </Toolbar>

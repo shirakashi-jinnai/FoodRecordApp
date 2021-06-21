@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Switch } from 'react-router'
 import Auth from './Auth'
-import { CommentForm, FavoritesList, ProductDetail, ProductEdit, ProductList, Reset, Signin, Signup } from './templetes'
+import { CommentForm, FavoritesList, ProductDetail, ProductEdit, ProductList, ProfileEdit, Reset, Signin, Signup } from './templetes'
 
 const Router = () => {
     return (
@@ -14,6 +14,7 @@ const Router = () => {
                 <Route path='/product/edit(/:id)?' component={ProductEdit} />
                 <Route path='/product/detail(/:id)?' component={ProductDetail} />
                 <Route path='/favorite(/:id)?' component={FavoritesList} />
+                <Route path='/profileedit' component={ProfileEdit} />
             </Auth>
         </Switch>
     )

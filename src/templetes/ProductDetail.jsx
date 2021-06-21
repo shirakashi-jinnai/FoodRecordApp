@@ -1,8 +1,10 @@
 import { Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { CommentArea, ImageSwiper, PriceBox, StoresBox } from '../components/Products'
 import { db } from '../firebase'
+import { getProductList } from '../products/selectors'
 
 const useStyles = makeStyles(theme => ({
     swiper: {
@@ -37,6 +39,8 @@ const ProductDetail = () => {
     const classes = useStyles();
     let id = window.location.pathname.split('/product/detail/')[1]
     const [product, setProduct] = useState('');
+    const selector = useSelector(state => state)
+    const getProduct = getProductList(selector)
 
     useEffect(() => {
         if (id) {
@@ -46,12 +50,9 @@ const ProductDetail = () => {
                     setProduct(data)
                 })
         }
-    }, [])
-
-    console.log(product)
+    }, [getProduct])
 
     return (
-
         <section className='section-wrapin'>
             <h1>商品詳細</h1>
             {product && (
@@ -70,7 +71,7 @@ const ProductDetail = () => {
                             </div>
                         </div>
                     </div>
-                    <CommentArea />
+                    <CommentArea comments={product.comments} />
                 </>
             )}
         </section>

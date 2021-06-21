@@ -2,8 +2,9 @@ import { Box, Fade, fade, Modal, TextField, Typography } from '@material-ui/core
 import { Rating } from '@material-ui/lab';
 import { makeStyles } from '@material-ui/styles';
 import React, { useCallback, useState } from 'react'
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { addComment } from '../../products/operating';
+import { addComment, fetchProducts } from '../../products/operating';
 import { getUserName } from '../../users/selectors';
 import ButtonBox from '../Uikit/ButtonBox';
 
@@ -39,6 +40,7 @@ const CommentModal = (props) => {
 
     const modalClose = useCallback((productId, contributor, rating, title, review) => {
         dispatch(addComment(productId, contributor, rating, title, review))
+        dispatch(fetchProducts())
         setTitle('')
         setReview('')
         setRating(2.5)

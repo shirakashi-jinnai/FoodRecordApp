@@ -48,7 +48,8 @@ const ProductEdit = () => {
         { name: '飲み物', id: "drink" },
         { name: '麺類', id: 'noodle' },
         { name: '揚げ物', id: 'frideFood' },
-        { name: '鍋料理', id: 'casserole' }
+        { name: '鍋料理', id: 'casserole' },
+        { name: 'その他', id: 'other' }
     ]
 
 
@@ -104,7 +105,7 @@ const ProductEdit = () => {
                 <SetStoresArea setStores={setStores} stores={stores} />
                 <div className="module-space--small" />
                 <div className="center">
-                    <ButtonBox label={'商品登録'} color={"secondary"} onClick={() => dispatch(saveProduct(category, description, images, name, prices, stores, storeName,id))} />
+                    <ButtonBox label={'商品登録'} color={"secondary"} onClick={() => dispatch(saveProduct(category, description, images, name, prices, stores, storeName, id))} />
                 </div>
             </div>
         </section>

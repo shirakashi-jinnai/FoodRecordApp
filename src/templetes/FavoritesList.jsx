@@ -29,10 +29,7 @@ const FavoritesList = () => {
     const query = window.location.search;
     // const category = /^\?category=/.test(query) ? query.split('?category=')[1] : "";このやり方でもできる
     const category = window.location.search.split('?category=')[1];
-
     const [favoCategories, setFavoCategories] = useState([]);
-    const [favoriteItems, setFavoriteItems] = useState([]);
-
 
     const deleteFavorite = useCallback((product, listId) => {
         dispatch(deleteProductsToFavorite(product, listId))
@@ -63,7 +60,7 @@ const FavoritesList = () => {
                     ))}
                 </List>
                 <List className={classes.main}>
-                    {favoriteLists.length ? favoriteLists.map(list => (//お気に入りリスト
+                    {favoriteLists.length > 0 ? favoriteLists.map(list => (//お気に入りリスト
                         list.favoriteList.map((item, i) => (//リストの中身
                             <FavoriteListItem item={item} key={i} listId={list.id} delete={deleteFavorite} />
                         ))

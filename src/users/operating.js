@@ -53,7 +53,7 @@ export const fetchFavoriteList = (category) => {
         const uid = getState().users.id;
         const favoriteRef = db.collection('users').doc(uid).collection('favorites');
         let query = favoriteRef.orderBy('timestamp', 'desc');
-        query = category ? favoriteRef.where('name', '==', category) : query;
+        query = category ? favoriteRef.where('name', '==', decodeURI(category)) : query;
         query.get().then(snapshots => {
             let list = []
             snapshots.forEach(snapshot => {
@@ -62,7 +62,6 @@ export const fetchFavoriteList = (category) => {
             })
             dispatch(addFavoriteLists(list))
         })
-
     }
 }
 

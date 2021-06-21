@@ -35,15 +35,12 @@ const ModalBox = (props) => {
     const [name, setName] = useState('')
     const [inputOpen, setInputOpen] = useState(false)
     const [checkedItems, setCheckedItems] = useState({})
-    const [checked, setChecked] =useState({
-        
-    })
 
 
     const handleChange = useCallback((e, id) => {//{id:true or false}のオブジェクトが作られる
         setCheckedItems({//merge アップデート
             ...checkedItems,
-            [id]: e.target.checked
+            [id]: e.target.checked//真偽値
         })
     })
 
