@@ -30,7 +30,7 @@ const HeaderDrawer = (props) => {
     ]
 
     useEffect(() => {
-        db.collection('categories').orderBy('order','asc').get().then(snapshots => {
+        db.collection('categories').orderBy('order', 'asc').get().then(snapshots => {
             const list = [];
             snapshots.forEach(snapshot => {
                 const data = snapshot.data()
@@ -48,26 +48,26 @@ const HeaderDrawer = (props) => {
                 anchor='left' open={props.open} onClose={e => props.tggleDrawer(e, false)}
             >
                 <div onKeyDown={e => props.tggleDrawer(e, false)}></div>
-                {menus.map((menu, i) => (
-                    <List key={i}>
-                        <ListItem onClick={e => menu.func(e, menu.path)}>
+                <List >
+                    {menus.map((menu, i) => (
+                        <ListItem onClick={e => menu.func(e, menu.path)} key={i} button>
                             <ListItemIcon>{menu.icon}</ListItemIcon>
                             <ListItemText primary={menu.label} />
                         </ListItem>
-                    </List>
-                ))}
+                    ))}
+                </List>
                 <Divider />
 
-                {filters.map((filter, i) => (
-                    <List key={i}>
-                        <ListItem onClick={e => filter.func(e, filter.path)}>
+                <List >
+                    {filters.map((filter, i) => (
+                        <ListItem onClick={e => filter.func(e, filter.path)} key={i} button>
                             <ListItemText primary={filter.label} />
                         </ListItem>
-                    </List>
-                ))}
+                    ))}
+                </List>
                 <Divider />
                 <List>
-                    <ListItem onClick={() => dispatch(signout())}>
+                    <ListItem onClick={() => dispatch(signout())} button>
                         <ListItemIcon >
                             <ExitToAppIcon />
                         </ListItemIcon>

@@ -4,6 +4,16 @@ import { deleteProductAction, fetchProductAction, resetProduct, updateProduct } 
 
 const productsrRef = db.collection('products');
 
+export const addComment = (id, contributor, rating, title, review) => {
+    return async (dispatch) => {
+        console.log(contributor)
+        const commentRef = productsrRef.doc(id);
+        commentRef.update({
+            comments: firestore.FieldValue.arrayUnion({ contributor: contributor, rating: rating, title: title, review: review })
+        })
+    }
+}
+
 export const editProduct = (id) => {
     return async (dispatch) => {
         productsrRef.doc(id).get()
@@ -100,12 +110,20 @@ export const searchProduct = (keyword) => {//検索機能
     }
 }
 
-export const addComment = (id, contributor, rating, title, review) => {
-    return async (dispatch) => {
-        console.log(contributor)
-        const commentRef = productsrRef.doc(id);
-        commentRef.update({
-            comments: firestore.FieldValue.arrayUnion({ contributor: contributor, rating: rating, title: title, review: review })
+export const shareProduct = () => {
+    // const url = 'https://cook-site.web.app/product/detail/' + id
+    if (navigator.share) {
+        navigator.share({
+            title: '食べ物図鑑',
+            text: 'おいしい食べ物をたくさん知ろう！',
+            url: 'https://cook-site.web.app/'
+            // url: String(url)
         })
+            .then(() => {
+                console.log('success')
+            }).catch(e => {
+                console.log(e)
+            })
     }
 }
+

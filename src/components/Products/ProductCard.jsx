@@ -2,7 +2,7 @@ import { Card, CardActions, CardContent, CardHeader, CardMedia, Collapse, Divide
 import { Edit, ExpandMore, Favorite, MoreVert, Share } from '@material-ui/icons';
 import React, { useCallback, useState } from 'react'
 import clsx from 'clsx';
-import { deleteProduct } from '../../products/operating';
+import { deleteProduct, shareProduct } from '../../products/operating';
 import { useDispatch } from 'react-redux';
 import { push } from 'connected-react-router';
 import { addFavoriteStock } from '../../users/operating';
@@ -48,6 +48,7 @@ const ProductCard = (props) => {
 
     const { category, description, id, images, name, prices, storeName, stores } = props.product
     const image = images[0].path;
+    const url = 'https://cook-site.web.app/product/detail/' + id
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget)
@@ -89,7 +90,7 @@ const ProductCard = (props) => {
                 <IconButton onClick={modalOpen} >
                     <Favorite />
                 </IconButton>
-                <IconButton>
+                <IconButton onClick={() => dispatch(shareProduct)}>
                     <Share />
                 </IconButton>
                 <IconButton onClick={handleClick}>

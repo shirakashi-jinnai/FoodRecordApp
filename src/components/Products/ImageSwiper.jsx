@@ -30,12 +30,6 @@ const ImageSwiper = (props) => {
                     <div key={image.path}><img src={image.path} alt="商品画像" /></div>
                 )))}
             </Swiper>
-            <IconButton>
-                <Favorite />
-            </IconButton>
-            <IconButton>
-                <Share />
-            </IconButton>
         </div>
     )
 }
