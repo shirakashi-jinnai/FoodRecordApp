@@ -13,12 +13,16 @@ const useStyles = makeStyles({
     modal: {
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     paper: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection:'column',
         background: '#fff',
         width: 500,
-        height: 500,
+        height: 'auto',
         borderRadius: 5
     }
 })
@@ -58,6 +62,7 @@ const CommentModal = (props) => {
                         <Typography>評価</Typography>
                         <Rating
                             name='review'
+                            size='large'
                             // defaultValue={2}
                             precision={0.5}
                             value={rating}
@@ -66,9 +71,10 @@ const CommentModal = (props) => {
                             }}
                         />
                     </Box>
-                    <div className='module-space--medium' />
+                    
                     <TextField label='タイトルを入れてください' fullWidth={true} onChange={inputTitle} />
                     <TextField label='本文を入れてください' fullWidth={true} multiline={true} rows={5} onChange={inputReviwe} />
+                    <div className='module-space--small' />
                     <ButtonBox
                         color={'primary'} label={'コメントを投稿'}
                         onClick={() => modalClose(props.id, props.userName, rating, title, review)}

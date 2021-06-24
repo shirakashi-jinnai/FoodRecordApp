@@ -6,7 +6,7 @@ const productsrRef = db.collection('products');
 
 export const addComment = (id, contributor, rating, title, review) => {
     return async (dispatch) => {
-        console.log(contributor)
+        if(!title){alert('タイトルを入力してください')}
         const commentRef = productsrRef.doc(id);
         commentRef.update({
             comments: firestore.FieldValue.arrayUnion({ contributor: contributor, rating: rating, title: title, review: review })
