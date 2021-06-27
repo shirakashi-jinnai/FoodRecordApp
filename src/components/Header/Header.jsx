@@ -1,10 +1,11 @@
-import { AppBar, IconButton, InputBase, TextField, Toolbar, Typography } from '@material-ui/core'
+import { AppBar, Avatar, IconButton, InputBase, TextField, Toolbar, Typography } from '@material-ui/core'
 import { AccountCircle, Favorite, Menu, Search } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/styles'
 import { push } from 'connected-react-router'
 import React, { Profiler, useCallback, useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { searchProduct } from '../../products/operating'
+import { getUserAvatar } from '../../users/selectors'
 import HeaderDrawer from './HeaderDrawer'
 
 const useStyles = makeStyles(theme => ({
@@ -37,6 +38,8 @@ const useStyles = makeStyles(theme => ({
 const Header = () => {
     const dispatch = useDispatch();
     const classes = useStyles();
+    const selector = useSelector(state => state);
+    const avatar = getUserAvatar(selector);
     const [open, setOpen] = useState(false),
         [keyword, setKeyword] = useState('');
 
@@ -83,7 +86,7 @@ const Header = () => {
                         <Favorite />
                     </IconButton>
                     <IconButton onClick={() => dispatch(push('/profileedit'))}>
-                        <AccountCircle />
+                        <Avatar src={avatar} alt='アバター画像' />
                     </IconButton>
                 </Toolbar>
             </AppBar>

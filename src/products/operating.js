@@ -59,7 +59,6 @@ export const saveProduct = (category, description, images, name, prices, stores,
             return false
         } else if (storeName === "") {
             storeName = "no data"
-            console.log(stores)
         }
         // else if (stores[0].place === "") {
         //     const data = { place: 'no data', businessHours: 'no deta' }

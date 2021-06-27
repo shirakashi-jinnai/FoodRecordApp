@@ -6,16 +6,19 @@ import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { db } from '../../firebase'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     listItem: {
-        display: 'flex',
+        [theme.breakpoints.down('sm')]:{
+            display:'flex',
+            flexDirection:'column'
+        }
     },
     listImg: {
         width: 150,
         height: 100,
         objectFit: 'cover'
     }
-})
+}))
 
 const FavoriteListItem = (props) => {
     const classes = useStyles();
@@ -34,7 +37,7 @@ const FavoriteListItem = (props) => {
                 </ListItemAvatar>
                 <ListItemText primary={name} secondary={description} />
                 {/* <ListItemText primary={props.item} /> */}
-                <IconButton onClick={() => props.delete (props.item, listId)}>
+                <IconButton onClick={() => props.delete(props.item, listId)}>
                     <Delete />
                 </IconButton>
             </ListItem>

@@ -81,6 +81,13 @@
     padding: 1rem;
 }
 
+.update-area{
+    display:flex;
+    flex-direction: column;
+    width: 500px;
+    margin: 0 auto;
+}
+
 .main{
     padding: 100px 0;
 }

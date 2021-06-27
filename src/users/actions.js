@@ -63,3 +63,14 @@ export const deleteFavoriteItem = (item) => {
         payload: item
     }
 }
+
+export const UPDATE_PROFILE_ACTION = 'UPDATE_PROFILE_ACTION'
+export const updateProfileAction = (users) => {
+    return {
+        type: 'UPDATE_PROFILE_ACTION',
+        payload: {
+            username: users.username,
+            avatar: users.avatar
+        }
+    }
+}

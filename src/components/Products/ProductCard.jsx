@@ -10,7 +10,11 @@ import { ModalBox } from '.';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        [theme.breakpoints.down('sm')]: {
+        [theme.breakpoints.down('xs')]: {
+            width: "calc(100% - 16px)",
+            margin: 2
+        },
+        [theme.breakpoints.up('sm')]: {
             width: "calc(50% - 16px)",
             margin: 5
         },

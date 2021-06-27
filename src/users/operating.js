@@ -2,11 +2,14 @@ import { FastForward } from "@material-ui/icons";
 import { push } from "connected-react-router"
 import { useDispatch } from "react-redux";
 import { auth, db, FirebaseTimestamp, firestore } from "../firebase"
-import { addFavoriteItem, addFavoriteLists, deleteFavoriteItem, signinAction, usersLogout } from "./actions";
+import { addFavoriteItem, addFavoriteLists, deleteFavoriteItem, signinAction, updateProfileAction, usersLogout } from "./actions";
 import { getUserFavorites } from "./selectors";
 
 export const addFavoriteStock = (stockName) => {
     return async (dispatch, getState) => {
+        if (stockName === '') {
+            return alert('リスト名を入力してください')
+        }
         const uid = getState().users.id;
         const favoriteRef = db.collection('users').doc(uid).collection('favorites').doc();
         const timestamp = FirebaseTimestamp.now()
@@ -65,43 +68,6 @@ export const fetchFavoriteList = (category) => {
     }
 }
 
-// export const fetchFavoriteItem = () => {//productIdの事
-//     return async (dispatch, getState) => {
-//         const uid = getState().users.id;
-//         const favoriteRef = db.collection('users').doc(uid).collection('favorites');
-//         favoriteRef.get().then(lists => {
-//             let items = []//この中にすべてのお気に入りリストに入っているproductIdを入れる favorites>favoriteLists>productId
-//             lists.forEach(list => {
-//                 const data = list.data()
-//                 data.favoriteList.forEach(item => {
-//                     items.push(item)
-//                 })
-//             });
-//             items = Array.from(new Set(items))//重複するproductIdを除外する
-
-//             let products = []
-//             // items.forEach(item => {
-//             //     db.collection('products').doc(item).get().then(product => {
-//             //         const data = product.data()
-//             //         // console.log(data)
-//             //         // dispatch(addFavoriteItem(data))
-//             //         products.push(data)
-//             //     })
-//             // })
-//             for (let item of items) {
-//                 db.collection('products').doc(item).get().then(product => {
-//                     const data = product.data()
-//                     // console.log(data)
-//                     // dispatch(addFavoriteItem(data))
-//                     products.push(data)
-//                 })
-//             }
-//             // const i = items.filter(item => typeof(item) === typeof)
-//             console.log(products)
-//             dispatch(addFavoriteItem(items))
-//         })
-//     }
-// }
 
 export const listenAuthState = () => {//現在ログインしているユーザーを取得
     return async (dispatch) => {
@@ -117,7 +83,7 @@ export const listenAuthState = () => {//現在ログインしているユーザ�
                             uid: data.uid
                         }))
                     })
-                dispatch(signinAction(user))
+                // dispatch(signinAction(user))
 
             } else {
                 // No user is signed in.
@@ -144,6 +110,17 @@ export const resetPassword = (email) => {
     }
 }
 
+export const update_Profile = (name, avatar) => {
+    return async (dispatch, getState) => {
+        avatar = avatar ? avatar : ''
+        const uid = getState().users.id;
+        const updateData = { username: name, avatar: avatar }
+        db.collection('users').doc(uid).set(updateData, { merge: true }).then(() => {
+            dispatch(updateProfileAction(updateData))
+            console.log('update success')
+        })
+    }
+}
 
 
 export const signup = (username, email, password, confirmpassword) => {
@@ -168,6 +145,7 @@ export const signup = (username, email, password, confirmpassword) => {
                         username: username,
                         role: 'customer',
                         email: email,
+                        avatar: '',
                         created_at: timestamp
                     }
 

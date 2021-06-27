@@ -11,7 +11,7 @@ const SetPriceArea = (props) => {
 
 
     const inputPrice = useCallback(e => {
-        setPrice(e.target.value)
+        e.target.value < 0 ? setPrice(price) : setPrice(e.target.value)
     }, [price])
 
     const inputSize = useCallback(e => {

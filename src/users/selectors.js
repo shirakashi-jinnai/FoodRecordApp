@@ -32,3 +32,8 @@ export const getIssigndin = createSelector(
     [userSelector],
     state => state.isSigndin
 )
+
+export const getUserAvatar = createSelector(
+    [userSelector],
+    state => state.avatar
+)

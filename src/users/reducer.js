@@ -20,6 +20,8 @@ export const UserReducer = (state = initialState.users, action) => {
                 ...state,
                 favoriteItem: [...action.payload]
             }
+        case Actions.UPDATE_PROFILE_ACTION:
+            return { ...state, ...action.payload }
         default:
             return state
     }

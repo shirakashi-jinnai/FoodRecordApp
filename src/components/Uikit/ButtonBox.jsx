@@ -6,7 +6,8 @@ const useStyles = makeStyles({
     btnStyle: {
         width: "100%",
         maxWidth:200,
-        height:50
+        height:50,
+        margin:'0 auto'
     }
 })
 

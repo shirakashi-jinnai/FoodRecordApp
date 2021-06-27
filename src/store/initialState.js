@@ -10,7 +10,8 @@ const initialState = {
         isSigndin: false,
         username: '',
         id: '',
-        signinTime: ''
+        signinTime: '',
+        avatar:''
     }
 }
 

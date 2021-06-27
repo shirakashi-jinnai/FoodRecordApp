@@ -10,19 +10,22 @@ const useStyles = makeStyles({
     paper: {
         margin: 'auto',
         width: 300,
-        height: 300,
+        height: 'auto',
         background: '#fff',
         border: '2px solid #000',
-        overflow: 'scroll',
     },
-    favoriteList: {
-
+    favoriteLists: {
+        overflowY: 'scroll',
+        height: 300
     },
     addspace: {
         display: 'flex',
         flexDirection: 'column',
         background: '#fff',
-        width: '100%'
+        width: '100%',
+    },
+    buttonStyle: {
+        display: 'none',
     }
 })
 
@@ -35,6 +38,7 @@ const ModalBox = (props) => {
     const [name, setName] = useState('')
     const [inputOpen, setInputOpen] = useState(false)
     const [checkedItems, setCheckedItems] = useState({})
+    const checked = Object.values(checkedItems).filter(item => item === true)
 
 
     const handleChange = useCallback((e, id) => {//{id:true or false}のオブジェクトが作られる
@@ -43,6 +47,8 @@ const ModalBox = (props) => {
             [id]: e.target.checked//真偽値
         })
     })
+
+    const ButtonStyle = !checked.length ? classes.buttonStyle : ''
 
     const handleClick = useCallback(() => {
         setInputOpen(true)
@@ -64,13 +70,11 @@ const ModalBox = (props) => {
         const dataArray = Object.entries(checkedItems).reduce((pre, [key, value]) => {//(1,アキュムレータ,2currentValue)
             value && pre.push(key)//checkboxでチェックされた要素のみをpreにpushする
             return pre//checkされたリストのIDが格納されている
-        }, [])
+        }, [])//[]は初期値
         dispatch(addProductsToFavorite(props.product, dataArray))
         setCheckedItems({})
         props.modalClose()
-        console.log(dataArray, props.product)
     }
-
 
     useEffect(() => {
         dispatch(fetchFavoriteList())
@@ -85,17 +89,19 @@ const ModalBox = (props) => {
                 <p>お気に入りリストに追加</p>
                 <Divider />
                 {/* <div className={classes.favoriteList} > */}
-                {favorites.map(item => {
-                    return (
-                        <CheckBox
-                            key={item.id}
-                            id={item.id}
-                            handlechange={(e) => handleChange(e, item.id)}
-                            color={'default'}
-                            label={item.name}
-                        />
-                    )
-                })}
+                <div className={classes.favoriteLists}>
+                    {favorites.map(item => {
+                        return (
+                            <CheckBox
+                                key={item.id}
+                                id={item.id}
+                                handlechange={(e) => handleChange(e, item.id)}
+                                color={'default'}
+                                label={item.name}
+                            />
+                        )
+                    })}
+                </div>
                 <div className={classes.addspace}>
                     <button onClick={handleClick} >+リストの新規作成</button>
                     {inputOpen && (
@@ -109,7 +115,7 @@ const ModalBox = (props) => {
                         </>
                     )}
 
-                    <Button variant="contained" onClick={(e) => addFavorites(e)} >保存する</Button>
+                    <Button variant="contained" onClick={(e) => addFavorites(e)} className={ButtonStyle} >保存する</Button>
                 </div>
             </div>
         </Modal >
