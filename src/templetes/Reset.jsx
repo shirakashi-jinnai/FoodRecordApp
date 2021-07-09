@@ -1,4 +1,5 @@
 import { TextField } from '@material-ui/core';
+import { push } from 'connected-react-router';
 import React, { useCallback, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { ButtonBox } from '../components/Uikit';
@@ -19,7 +20,11 @@ const Reset = () => {
                 value={email} onChange={inputEmail} label='email'//
                 margin='dense' type='email' fullWidth={true}
             />
-            <ButtonBox color={'primary'} onClick={() => dispatch(resetPassword(email))} label={'送信'} />
+            <div className="center">
+                <ButtonBox color={'primary'} onClick={() => dispatch(resetPassword(email))} label={'送信'} />
+            </div>
+            <p onClick={() => dispatch(push('/signin'))}>アカウントをお持ちの方はこちら</p>
+            <p onClick={() => dispatch(push('/signup'))} >サインアップの方はこちら</p>
         </div>
     )
 }

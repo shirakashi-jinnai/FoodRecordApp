@@ -3,6 +3,7 @@ import { push } from 'connected-react-router';
 import React, { useCallback, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { signup } from '../users/operating';
+import eximg from '../asetts/img/exsignup.png'
 
 const Signup = () => {
     const [email, setEmail] = useState('');
@@ -38,10 +39,17 @@ const Signup = () => {
                     value={email} onChange={inputEmail} label='emailを入力'//
                     margin='dense' placeholder='example@ex.com' type='text' fullWidth={true}
                 />
-                <TextField
-                    value={password} onChange={inputPassword} label='パスワードを入力'//
-                    margin='dense' type='password' fullWidth={true}
-                />
+                {password.length <= 6 ? (
+                    <TextField
+                        value={password} onChange={inputPassword} label='パスワードを入力'//
+                        margin='dense' type='password' fullWidth={true} error helperText='パスワードは6文字以上にしてください'
+                    />
+                ) : (
+                    <TextField
+                        value={password} onChange={inputPassword} label='パスワードを入力'//
+                        margin='dense' type='password' fullWidth={true} 
+                    />
+                )}
                 {password === confirmpassword ? (
                     <TextField
                         value={confirmpassword} onChange={inputConfirmpassword} label='確認用パスワードを入力'//
@@ -50,15 +58,20 @@ const Signup = () => {
                 ) : (
                     <TextField
                         value={confirmpassword} onChange={inputConfirmpassword} label='確認用パスワードを入力'//
-                        margin='dense' type='password' fullWidth={true} error variant='outlined' helperText="Incorrect entry."
+                        margin='dense' type='password' fullWidth={true} error variant='outlined' helperText="パスワードが一致しません"
                     />
                 )}
-            <p onClick={()=>dispatch(push('/signin'))}>アカウントをお持ちの方はこちら</p>
+                <p onClick={() => dispatch(push('/signin'))}>アカウントをお持ちの方はこちら</p>
             </div>
             <div className="center">
                 <Button color="primary" variant="contained" onClick={() => dispatch(signup(username, email, password, confirmpassword))}>
                     アカウントを登録
-            </Button>
+                </Button>
+            </div>
+            <div className="module-space--medium" />
+            <div className='infomation'>
+                <p>架空のメールアドレスを使っていただいても使用可能です</p>
+                <img src={eximg} alt="イメージ画像" />
             </div>
         </div>
     )

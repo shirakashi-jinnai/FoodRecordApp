@@ -14,7 +14,6 @@ const useStyles = makeStyles({
 
 const ButtonBox = (props) => {
     const classes = useStyles();
-
     return (
         <Button variant="contained" color={props.color} className={classes.btnStyle}  onClick={()=>props.onClick()}>
             {props.label}

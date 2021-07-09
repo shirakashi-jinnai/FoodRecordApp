@@ -5,7 +5,7 @@ import { push } from 'connected-react-router'
 import React, { Profiler, useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { searchProduct } from '../../products/operating'
-import { getUserAvatar } from '../../users/selectors'
+import { getIssigndin, getUserAvatar } from '../../users/selectors'
 import HeaderDrawer from './HeaderDrawer'
 
 const useStyles = makeStyles(theme => ({
@@ -39,6 +39,7 @@ const Header = () => {
     const dispatch = useDispatch();
     const classes = useStyles();
     const selector = useSelector(state => state);
+    const isSigndin = getIssigndin(selector)
     const avatar = getUserAvatar(selector);
     const [open, setOpen] = useState(false),
         [keyword, setKeyword] = useState('');
@@ -82,12 +83,17 @@ const Header = () => {
                         <input type="submit" method='get' /> 
                     </form> */}
                     <div className={classes.grow}></div>
-                    <IconButton onClick={() => dispatch(push('/favorite'))}>
-                        <Favorite />
-                    </IconButton>
-                    <IconButton onClick={() => dispatch(push('/profileedit'))}>
-                        <Avatar src={avatar} alt='アバター画像' />
-                    </IconButton>
+                    {isSigndin && (
+                        <>
+                            <IconButton onClick={() => dispatch(push('/favorite'))}>
+                                <Favorite />
+                            </IconButton>
+
+                            <IconButton onClick={() => dispatch(push('/profileedit'))}>
+                                <Avatar src={avatar} alt='アバター画像' />
+                            </IconButton>
+                        </>
+                    )}
                 </Toolbar>
             </AppBar>
         </div>

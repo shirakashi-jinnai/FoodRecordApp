@@ -90,7 +90,7 @@ const ModalBox = (props) => {
                 <Divider />
                 {/* <div className={classes.favoriteList} > */}
                 <div className={classes.favoriteLists}>
-                    {favorites.map(item => {
+                    {favorites.length? favorites.map(item => {
                         return (
                             <CheckBox
                                 key={item.id}
@@ -100,7 +100,7 @@ const ModalBox = (props) => {
                                 label={item.name}
                             />
                         )
-                    })}
+                    }):(<p>お気に入りリストがありません。作成しましょう！</p> )}
                 </div>
                 <div className={classes.addspace}>
                     <button onClick={handleClick} >+リストの新規作成</button>

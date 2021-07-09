@@ -1,4 +1,4 @@
-import { Avatar, IconButton, TextField } from '@material-ui/core';
+import { Avatar, IconButton, Modal, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import React from 'react'
 import { useEffect } from 'react';
@@ -10,7 +10,7 @@ import { db, storage } from '../firebase';
 import { getUserAvatar, getUserId, getUserName } from '../users/selectors';
 import image from '../asetts/img/building.png'
 import shortid from 'shortid';
-import { update_Profile } from '../users/operating';
+import { deleteUser, update_Profile } from '../users/operating';
 
 const useStyles = makeStyles({
     avatar: {
@@ -34,12 +34,20 @@ const ProfileEdit = () => {
     const username = getUserName(selector);
     // const [account, setAccount] = useState({ name: username, image: '' })
     const [name, setName] = useState(username),
-        [avatar, setAavatar] = useState(useravatar);
-
+        [avatar, setAavatar] = useState(useravatar),
+        [open, setOpen] = useState(false);
     console.log(avatar)
+
+    const handleClick = useCallback(() => {
+        const result = window.confirm('アカウントを削除しますか？');
+        console.log(result)
+        result && dispatch(deleteUser())
+    }, []);
+
     const inputName = useCallback((e) => {
         setName(e.target.value)
     }, [setName])
+
 
     const uploadAvatar = useCallback(e => {
         const file = e.target.files;
@@ -60,7 +68,6 @@ const ProfileEdit = () => {
         })
     }, [setAavatar])
 
-    console.log(avatar)
 
     return (
         <div className='section-wrapin'>
@@ -78,12 +85,10 @@ const ProfileEdit = () => {
                 <TextField value={name} onChange={inputName} />
                 <div className='module-space--small' />
                 <ButtonBox label={'更新'} color={'primary'} onClick={() => dispatch(update_Profile(name, avatar))} />
+                <div className='module-space--large' />
+                <ButtonBox label={'アカウントを削除'} color={'secondary'} onClick={handleClick} />
             </div>
-
-            {/* <div>
-                <ButtonBox label={'アカウントを削除'} color={'secondary'} onClick={() => console.log("aa")} />
-            </div> */}
-        </div>
+        </div >
     )
 }
 

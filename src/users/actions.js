@@ -21,7 +21,8 @@ export const signinAction = (users) => {//actionはstoreを変更するために
             isSigndin: true,
             username: users.username,
             id: users.uid,
-            signinTime: timestamp
+            signinTime: timestamp,
+            avatar: users.avatar
         }
 
     }
@@ -31,11 +32,12 @@ export const USERS_LOGOUT = "USERS_LOGOUT"
 export const usersLogout = () => {
     return {
         type: 'USERS_LOGOUT',
-        peyload: {
+        payload: {
             isSigndin: false,
             username: '',
             id: '',
-            signinTime: ''
+            signinTime: '',
+            avatar: ''
         }
     }
 }

@@ -1,4 +1,5 @@
 import { FastForward } from "@material-ui/icons";
+import { AvatarGroup } from "@material-ui/lab";
 import { push } from "connected-react-router"
 import { useDispatch } from "react-redux";
 import { auth, db, FirebaseTimestamp, firestore } from "../firebase"
@@ -32,6 +33,18 @@ export const addProductsToFavorite = (product, listsId) => {
             })
         })
         // dispatch(addProductsToFavoriteAction())
+    }
+}
+
+export const deleteUser = () => {
+    return async (dispath) => {
+        console.log('click')
+        const user = auth.currentUser;
+        user.delete().then(()=>{
+            dispath(usersLogout(),push('/signin'))
+        }).then(()=>{
+            alert('ユーザーを削除しました。')
+        })
     }
 }
 
@@ -80,14 +93,19 @@ export const listenAuthState = () => {//現在ログインしているユーザ�
                         const data = snapshot.data()
                         dispatch(signinAction({
                             username: data.username,
-                            uid: data.uid
+                            uid: data.uid,
+                            avatar: data.avatar
                         }))
                     })
                 // dispatch(signinAction(user))
 
             } else {
                 // No user is signed in.
-                dispatch(push('signin'))
+                dispatch(push('/signup'))
+                // dispatch(signinAction({
+                //     username:'ゲストユーザー',
+                //     uid
+                // }))
             }
         });
     }
@@ -180,6 +198,7 @@ export const signin = (email, password) => {
                             dispatch(signinAction({
                                 username: data.username,
                                 uid: data.uid,
+                                avatar: data.avatar
                             }));
                             dispatch(push('/'));
                         })
@@ -188,15 +207,17 @@ export const signin = (email, password) => {
                 }
             }).catch(e => {
                 console.log('エラー発生', e);
+                alert('メールアドレスもしくはパスワードが違います。')
             })
     }
 }
 
 export const signout = () => {
-    return async (dispatch) => {
+    return async (dispatch, getState) => {
         auth.signOut()
             .then(() => {
                 dispatch(usersLogout())
+                // console.log(avatar, signdin)
                 dispatch(push('/signin'))
             })
     }

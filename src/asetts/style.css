@@ -14,7 +14,7 @@
 .section-wrapin {
     margin: 0 auto;
     max-width: 1000px;
-    width: 100%;  
+    width: 100%;
 }
 
 .module-space--small {
@@ -53,18 +53,6 @@
     /* height: 100%; */
 }
 
-/* .preview-area::before {
-    padding-top: 200%;
-    content: '';
-    display: block;
-} */
-
-/* .preview-area::before {
-    content: "";
-    display: block;
-    padding-top: 100%;
-} */
-
 .preview-area>img {
     /* position: absolute; */
     object-fit: cover;
@@ -81,14 +69,21 @@
     padding: 1rem;
 }
 
-.update-area{
-    display:flex;
+.infomation {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.update-area {
+    display: flex;
     flex-direction: column;
     width: 500px;
     margin: 0 auto;
 }
 
-.main{
+.main {
     padding: 100px 0;
 }
 

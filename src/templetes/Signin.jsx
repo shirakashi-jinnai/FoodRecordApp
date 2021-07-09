@@ -1,8 +1,9 @@
 import { Button, TextField } from '@material-ui/core';
 import { push } from 'connected-react-router';
 import React, { useCallback, useState } from 'react'
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { signin } from '../users/operating';
+import { signin, signout } from '../users/operating';
 
 const Signin = () => {
     const dispatch = useDispatch();
@@ -18,6 +19,10 @@ const Signin = () => {
         setPassword(e.target.value);
     }, [setPassword])
 
+    useEffect(() => {
+        dispatch(signout())
+    }, [])
+
     return (
         <div className='section-container'>
             <TextField
@@ -28,9 +33,11 @@ const Signin = () => {
                 value={password} onChange={inputPassword} label='パスワードを入力'//
                 margin='dense' type='password' fullWidth={true}
             />
-            <Button color="primary" variant="contained" onClick={() => dispatch(signin(email, password))} >
-                ログイン
-            </Button>
+            <div className='center'>
+                <Button color="primary" variant="contained" onClick={() => dispatch(signin(email, password))} >
+                    ログイン
+                </Button>
+            </div>
             <p onClick={() => dispatch(push('/reset'))} >パスワードを忘れた方はこちら</p>
             <p onClick={() => dispatch(push('/signup'))} >サインアップの方はこちら</p>
         </div>

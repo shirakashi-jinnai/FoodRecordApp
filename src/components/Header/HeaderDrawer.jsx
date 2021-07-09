@@ -8,10 +8,12 @@ import { db } from '../../firebase';
 import { searchProduct } from '../../products/operating';
 import { getProductList } from '../../products/selectors';
 import { signout } from '../../users/operating';
+import { getIssigndin } from '../../users/selectors';
 
 const HeaderDrawer = (props) => {
     const dispatch = useDispatch();
     const selector = useSelector(state => state)
+    const isSigndin = getIssigndin(selector)
     const products = getProductList(selector)
 
 
