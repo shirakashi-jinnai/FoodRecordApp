@@ -28,7 +28,6 @@ export const deleteProduct = (id) => {
     return async (dispatch, getState) => {
         productsrRef.doc(id).delete()
             .then(() => {
-                // dispatch(fetchProducts)
                 const products = getState().products.list
                 const newProducts = products.filter(product => product.id !== id)
                 dispatch(deleteProductAction(newProducts))
@@ -60,10 +59,7 @@ export const saveProduct = (category, description, images, name, prices, stores,
         } else if (storeName === "") {
             storeName = "no data"
         }
-        // else if (stores[0].place === "") {
-        //     const data = { place: 'no data', businessHours: 'no deta' }
-        //     stores.push(data)
-        // }
+       
         const timestamp = FirebaseTimestamp.now()
         const data = {
             category: category,
@@ -99,24 +95,20 @@ export const searchProduct = (keyword) => {//検索機能
         if (keyword === '') {
             dispatch(resetProduct(products))
         }
-        // const searchedProducts = getState().products.list
         const updateList = products.filter(product => {
             return product.name.toLowerCase().search(keyword.toLowerCase()) !== -1;
         })
         console.log(updateList)
         dispatch(updateProduct(updateList))
-        // filterList(keyword)
     }
 }
 
 export const shareProduct = () => {
-    // const url = 'https://cook-site.web.app/product/detail/' + id
     if (navigator.share) {
         navigator.share({
             title: '食べ物図鑑',
             text: 'おいしい食べ物をたくさん知ろう！',
             url: 'https://cook-site.web.app/'
-            // url: String(url)
         })
             .then(() => {
                 console.log('success')

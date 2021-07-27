@@ -20,14 +20,5 @@ function App() {
   );
 }
 
-// class test extends Component {
-//   constructor(props) {
-//     super(props)
-//     this.state = {
-//       test: this.props,
-//       test1: [{a: 1, b: 2 }]
-//     }
-//   }
-// }
 
 export default App;

@@ -65,9 +65,7 @@ const FavoritesList = () => {
                             <FavoriteListItem item={item} key={i} listId={list.id} delete={deleteFavorite} />
                         ))
                     )) : (<p>お気に入りリストが見つかりません</p>)}
-                    {/* {favoriteItems.length > 0 ?favoriteItems.map((item, i) => (
-                        <FavoriteListItem item={item} key={i} />
-                    )):(<p>お気に入りリストが見つかりません</p>)} */}
+                   
                 </List>
             </div>
         </section >

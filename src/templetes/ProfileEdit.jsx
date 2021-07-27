@@ -32,7 +32,6 @@ const ProfileEdit = () => {
     const uid = getUserId(selector);
     const useravatar = getUserAvatar(selector)
     const username = getUserName(selector);
-    // const [account, setAccount] = useState({ name: username, image: '' })
     const [name, setName] = useState(username),
         [avatar, setAavatar] = useState(useravatar),
         [open, setOpen] = useState(false);

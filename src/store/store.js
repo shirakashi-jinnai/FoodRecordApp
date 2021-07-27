@@ -5,7 +5,6 @@ import thunk from 'redux-thunk'
 import { UserReducer } from '../users/reducer'
 import { ProductsReducer } from '../products/reducer'
 
-// const users = usertest;
 const teststore = (history) => {
     //reducerが入る
     return createStore(
@@ -18,8 +17,6 @@ const teststore = (history) => {
             routerMiddleware(history),
             thunk
         )
-
-        // UserReducer
     )
 }
 

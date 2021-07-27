@@ -27,7 +27,6 @@ const FavoriteListItem = (props) => {
     const { name, description, images, id } = props.item
     const listId = props.listId
     const image = images ? images[0].path : 'no image';
-    // console.log(product)
 
     return (
         <>
@@ -36,7 +35,6 @@ const FavoriteListItem = (props) => {
                     <img src={image} alt="商品画像" className={classes.listImg} />
                 </ListItemAvatar>
                 <ListItemText primary={name} secondary={description} />
-                {/* <ListItemText primary={props.item} /> */}
                 <IconButton onClick={() => props.delete(props.item, listId)}>
                     <Delete />
                 </IconButton>

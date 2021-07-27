@@ -20,7 +20,6 @@ export const ProductsReducer = (state = initialState.products, action) => {
             return {
                 ...state,
                 list: [...action.payload],
-                // searchList: [...action.payload]
             }
         case Actions.RESET_PRODUCT:
             return {
