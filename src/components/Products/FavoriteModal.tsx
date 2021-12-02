@@ -5,51 +5,51 @@ import {
   FormControlLabel,
   Modal,
   TextField,
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
-import React, { useCallback, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+} from '@material-ui/core'
+import { makeStyles } from '@material-ui/styles'
+import React, { useCallback, useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   addFavoriteStock,
   addProductsToFavorite,
   fetchFavoriteList,
-} from "../../users/operating";
-import { getUserFavorites, getUserName } from "../../users/selectors";
-import { CheckBox } from "../Uikit";
+} from '../../users/operating'
+import { getUserFavorites, getUserName } from '../../users/selectors'
+import { CheckBox } from '../Uikit'
 
 const useStyles = makeStyles({
   paper: {
-    margin: "auto",
+    margin: 'auto',
     width: 300,
-    height: "auto",
-    background: "#fff",
-    border: "2px solid #000",
+    height: 'auto',
+    background: '#fff',
+    border: '2px solid #000',
   },
   favoriteLists: {
-    overflowY: "scroll",
+    overflowY: 'scroll',
     height: 300,
   },
   addspace: {
-    display: "flex",
-    flexDirection: "column",
-    background: "#fff",
-    width: "100%",
+    display: 'flex',
+    flexDirection: 'column',
+    background: '#fff',
+    width: '100%',
   },
   buttonStyle: {
-    display: "none",
+    display: 'none',
   },
-});
+})
 
-const ModalBox = (props) => {
-  const dispatch = useDispatch();
-  const classes = useStyles();
-  const selector = useSelector((state) => state);
-  const favorites = getUserFavorites(selector);
+const ModalBox = (props: any) => {
+  const dispatch = useDispatch()
+  const classes = useStyles()
+  const selector = useSelector((state) => state)
+  const favorites = getUserFavorites(selector)
 
-  const [name, setName] = useState("");
-  const [inputOpen, setInputOpen] = useState(false);
-  const [checkedItems, setCheckedItems] = useState({});
-  const checked = Object.values(checkedItems).filter((item) => item === true);
+  const [name, setName] = useState('')
+  const [inputOpen, setInputOpen] = useState(false)
+  const [checkedItems, setCheckedItems] = useState({})
+  const checked = Object.values(checkedItems).filter((item) => item === true)
 
   const handleChange = useCallback((e, id) => {
     //{id:true or false}のオブジェクトが作られる
@@ -57,48 +57,48 @@ const ModalBox = (props) => {
       //merge アップデート
       ...checkedItems,
       [id]: e.target.checked, //真偽値
-    });
-  });
+    })
+  }, [])
 
-  const ButtonStyle = !checked.length ? classes.buttonStyle : "";
+  const ButtonStyle = !checked.length ? classes.buttonStyle : ''
 
   const handleClick = useCallback(() => {
-    setInputOpen(true);
-  }, [setInputOpen]);
+    setInputOpen(true)
+  }, [setInputOpen])
 
   const handleClose = useCallback(
     (name) => {
-      dispatch(addFavoriteStock(name)); //stockの追加
-      setInputOpen(false);
-      setName("");
+      dispatch(addFavoriteStock(name)) //stockの追加
+      setInputOpen(false)
+      setName('')
     },
-    [setInputOpen]
-  );
+    [setInputOpen],
+  )
 
-  const inputName = (e) => {
-    setName(e.target.value);
-  };
+  const inputName = (e: any) => {
+    setName(e.target.value)
+  }
 
   //送信ボタンを押したタイミングで、checkedItemsオブジェクトのvalueがtrueのkeyのみを配列にしてconsoleに表示させる
-  const addFavorites = (e) => {
+  const addFavorites = (e: any) => {
     //valueがtrueの値を返す
-    e.preventDefault();
+    e.preventDefault()
     const dataArray = Object.entries(checkedItems).reduce(
-      (pre, [key, value]) => {
+      (pre: string[], [key, value]) => {
         //(1,アキュムレータ,2currentValue)
-        value && pre.push(key); //checkboxでチェックされた要素のみをpreにpushする
-        return pre; //checkされたリストのIDが格納されている
+        value && pre.push(key) //checkboxでチェックされた要素のみをpreにpushする
+        return pre //checkされたリストのIDが格納されている
       },
-      []
-    ); //[]は初期値
-    dispatch(addProductsToFavorite(props.product, dataArray));
-    setCheckedItems({});
-    props.modalClose();
-  };
+      [],
+    ) //[]は初期値
+    dispatch(addProductsToFavorite(props.product, dataArray))
+    setCheckedItems({})
+    props.modalClose()
+  }
 
   useEffect(() => {
-    dispatch(fetchFavoriteList());
-  }, [inputOpen]);
+    dispatch(fetchFavoriteList())
+  }, [inputOpen])
 
   return (
     <Modal open={props.open} onClose={props.modalClose}>
@@ -107,16 +107,16 @@ const ModalBox = (props) => {
         <Divider />
         <div className={classes.favoriteLists}>
           {favorites.length ? (
-            favorites.map((item) => {
+            favorites.map((item: any) => {
               return (
                 <CheckBox
                   key={item.id}
                   id={item.id}
-                  handlechange={(e) => handleChange(e, item.id)}
-                  color={"default"}
+                  handlechange={(e: any) => handleChange(e, item.id)}
+                  color={'default'}
                   label={item.name}
                 />
-              );
+              )
             })
           ) : (
             <p>お気に入りリストがありません。作成しましょう！</p>
@@ -128,7 +128,7 @@ const ModalBox = (props) => {
             <>
               <p>リスト名</p>
               <TextField
-                className={classes.TextField}
+                // className={classes.TextField}
                 variant="outlined"
                 margin="dense"
                 value={name}
@@ -150,7 +150,7 @@ const ModalBox = (props) => {
         </div>
       </div>
     </Modal>
-  );
-};
+  )
+}
 
-export default ModalBox;
+export default ModalBox

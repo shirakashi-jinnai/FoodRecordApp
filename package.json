@@ -17,8 +17,8 @@
     "lodash": "^4.17.21",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-id-swiper": "^3.0.0",
-    "react-redux": "^7.2.4",
+    "react-id-swiper": "^4.0.0",
+    "react-redux": "^7.2.6",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
@@ -57,6 +57,11 @@
     ]
   },
   "devDependencies": {
+    "@types/history": "^4.7.9",
+    "@types/node": "^16.11.11",
+    "@types/react": "^17.0.37",
+    "@types/react-dom": "^17.0.11",
+    "@types/shortid": "^0.0.29",
     "minimatch": "^3.0.4"
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
