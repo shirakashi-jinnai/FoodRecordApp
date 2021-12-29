@@ -27,7 +27,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }))
 
-const FavoriteListItem = (props: any) => {
+const FavoriteListItem = (props: {
+  item: Product
+  listId: string
+  delete: (product: Product, listId: string) => void
+}) => {
   const classes = useStyles()
   const dispatch = useDispatch()
 

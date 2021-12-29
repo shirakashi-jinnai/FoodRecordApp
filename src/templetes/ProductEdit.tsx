@@ -1,9 +1,10 @@
+import _ from 'lodash'
 import { TextField } from '@material-ui/core'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useReducer, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { ImageArea, SetPriceArea, SetStoresArea } from '../components/Products'
 import { ButtonBox, SelectBox } from '../components/Uikit'
-import { saveProduct } from '../products/operating'
+import { saveProduct } from '../reducks/products/operating'
 import { db } from '../firebase'
 
 const ProductEdit = () => {
@@ -15,13 +16,29 @@ const ProductEdit = () => {
     id = id.split('/')[1]
   }
 
+  const [product, setProduct] = useReducer(
+    (state: any, data: any) => _.merge({}, state, data),
+    {
+      name: '',
+      images: [],
+      description: '',
+      category: '',
+      prices: [],
+      storeName: '',
+      stores: [],
+    },
+  )
+
   const [name, setName] = useState(''),
-    [images, setImages] = useState([]),
+    [images, setImages] = useState<Image[]>([]),
     [description, setDescription] = useState(''),
     [category, setCategory] = useState(''),
     [prices, setPrices] = useState([]),
     [storeName, setStoreName] = useState(''),
     [stores, setStores] = useState([])
+
+  const onValueChange = ({ target }) =>
+    setProduct({ [target.name]: target.value })
 
   const inputName = useCallback(
     (e) => {
@@ -90,6 +107,7 @@ const ProductEdit = () => {
 
         <TextField
           value={name}
+          name="name"
           onChange={inputName}
           label="商品名を入力" //
           margin="dense"
@@ -98,6 +116,7 @@ const ProductEdit = () => {
         />
         <TextField
           value={description}
+          name="description"
           onChange={inputDescription}
           label="商品説明" //
           margin="dense"
@@ -108,6 +127,7 @@ const ProductEdit = () => {
         />
         <SelectBox
           label={'カテゴリー'}
+          name="category"
           value={category}
           onChange={inputCategory}
           required={true}
@@ -120,6 +140,7 @@ const ProductEdit = () => {
 
         <TextField
           value={storeName}
+          name="storeName"
           onChange={inputStoreName}
           label="店名" //
           margin="dense"

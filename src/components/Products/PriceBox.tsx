@@ -9,7 +9,7 @@ import {
   TableRow,
 } from '@material-ui/core'
 
-const PriceBox = (props: any) => {
+const PriceBox = (props: { prices: Price[] }) => {
   return (
     <TableContainer component={Paper}>
       <Table>
@@ -21,7 +21,7 @@ const PriceBox = (props: any) => {
         </TableHead>
         <TableBody>
           {props.prices.length > 0 &&
-            props.prices.map((price: any, i: any) => (
+            props.prices.map((price: Price, i: number) => (
               <TableRow key={i}>
                 <TableCell>{price.size}</TableCell>
                 <TableCell>￥{price.price}円</TableCell>

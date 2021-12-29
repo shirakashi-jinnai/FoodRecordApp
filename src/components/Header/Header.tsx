@@ -2,19 +2,18 @@ import {
   AppBar,
   Avatar,
   IconButton,
-  InputBase,
   TextField,
   Theme,
   Toolbar,
   Typography,
 } from '@material-ui/core'
-import { AccountCircle, Favorite, Menu, Search } from '@material-ui/icons'
+import { Favorite, Menu, Search } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/styles'
 import { push } from 'connected-react-router'
-import React, { Profiler, useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { searchProduct } from '../../products/operating'
-import { getIssigndin, getUserAvatar } from '../../users/selectors'
+import { searchProduct } from '../../reducks/products/operating'
+import { getIssigndin, getUserAvatar } from '../../reducks/users/selectors'
 import HeaderDrawer from './HeaderDrawer'
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -93,14 +92,8 @@ const Header = () => {
               placeholder="検索"
               onChange={inputKeyword}
             />
-            {/* <input type="submit" method='get' /> */}
-            {/* <IconButton >
-                        </IconButton> */}
           </div>
-          {/* <form action="search">
-                        <input type="text" placeholder='keyword' name='search-key'   />
-                        <input type="submit" method='get' /> 
-                    </form> */}
+
           <div className={classes.grow}></div>
           {isSigndin && (
             <>

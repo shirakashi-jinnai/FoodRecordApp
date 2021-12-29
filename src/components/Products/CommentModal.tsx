@@ -11,8 +11,8 @@ import { makeStyles } from '@material-ui/styles'
 import React, { useCallback, useState } from 'react'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { addComment, fetchProducts } from '../../products/operating'
-import { getUserName } from '../../users/selectors'
+import { addComment, fetchProducts } from '../../reducks/products/operating'
+import { getUserName } from '../../reducks/users/selectors'
 import ButtonBox from '../Uikit/ButtonBox'
 
 const useStyles = makeStyles({
@@ -33,7 +33,15 @@ const useStyles = makeStyles({
   },
 })
 
-const CommentModal = (props: any) => {
+type Modal = {
+  handleOpen: () => void
+  handleClose: () => void
+  open: boolean
+  id: string
+  userName: string
+}
+
+const CommentModal = (props: Modal) => {
   const classes = useStyles()
   const dispatch = useDispatch()
   const [title, setTitle] = useState(''),

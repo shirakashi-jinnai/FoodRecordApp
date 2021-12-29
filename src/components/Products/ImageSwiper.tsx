@@ -1,5 +1,5 @@
 // import Swiper from 'react-id-swiper'
-const ImageSwiper = (props: any) => {
+const ImageSwiper = (props: { images: Image[] }) => {
   const params = {
     pagination: {
       el: '.swiper-pagination',

@@ -4,12 +4,12 @@ import { push } from 'connected-react-router'
 import React, { useCallback, useState } from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchProducts } from '../../products/operating'
-import { getProductList } from '../../products/selectors'
-import { getUserName } from '../../users/selectors'
+import { fetchProducts } from '../../reducks/products/operating'
+import { getProductList } from '../../reducks/products/selectors'
+import { getUserName } from '../../reducks/users/selectors'
 import { CommentModal, CommentPreview } from './index'
 
-const CommentArea = (props: any) => {
+const CommentArea = (props: { comments: Comment[] }) => {
   const dispatch = useDispatch()
   const productId = window.location.pathname.split('/product/detail/')[1]
   const selector = useSelector((state) => state)
@@ -36,7 +36,7 @@ const CommentArea = (props: any) => {
       </Button>
       <List>
         {props.comments &&
-          props.comments.map((comment: any, i: any) => (
+          props.comments.map((comment: Comment, i: number) => (
             <CommentPreview comment={comment} key={i} />
           ))}
       </List>

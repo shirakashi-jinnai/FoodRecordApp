@@ -1,11 +1,4 @@
-import {
-  Button,
-  Checkbox,
-  Divider,
-  FormControlLabel,
-  Modal,
-  TextField,
-} from '@material-ui/core'
+import { Button, Divider, Modal, TextField } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -13,8 +6,8 @@ import {
   addFavoriteStock,
   addProductsToFavorite,
   fetchFavoriteList,
-} from '../../users/operating'
-import { getUserFavorites, getUserName } from '../../users/selectors'
+} from '../../reducks/users/operating'
+import { getUserFavorites } from '../../reducks/users/selectors'
 import { CheckBox } from '../Uikit'
 
 const useStyles = makeStyles({
@@ -40,7 +33,13 @@ const useStyles = makeStyles({
   },
 })
 
-const ModalBox = (props: any) => {
+type ModalBox = {
+  open: boolean
+  modalClose: () => void
+  product: Product
+}
+
+const ModalBox = (props: ModalBox) => {
   const dispatch = useDispatch()
   const classes = useStyles()
   const selector = useSelector((state) => state)
@@ -72,6 +71,7 @@ const ModalBox = (props: any) => {
       setInputOpen(false)
       setName('')
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [setInputOpen],
   )
 

@@ -1,6 +1,6 @@
 /* eslint-disable eqeqeq */
 import { push } from 'connected-react-router'
-import { auth, db, FirebaseTimestamp, firestore } from '../firebase'
+import { auth, db, FirebaseTimestamp, firestore } from '../../firebase'
 import {
   addFavoriteLists,
   deleteFavoriteItem,

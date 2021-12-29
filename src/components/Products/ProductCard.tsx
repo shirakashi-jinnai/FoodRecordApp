@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core'
 import { Favorite, MoreVert, Share } from '@material-ui/icons'
 import { useCallback, useState } from 'react'
-import { deleteProduct, shareProduct } from '../../products/operating'
+import { deleteProduct, shareProduct } from '../../reducks/products/operating'
 import { useDispatch } from 'react-redux'
 import { push } from 'connected-react-router'
 import { ModalBox } from '.'
@@ -51,13 +51,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const ProductCard = (props: any) => {
+const ProductCard = ({ product }: { product: Product }) => {
   const classes = useStyles()
   const dispatch = useDispatch()
   const [anchorEl, setAnchorEl] = useState(null)
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState<boolean>(false)
 
-  const { description, id, images, name, prices } = props.product
+  const { description, id, images, name, prices } = product
   const image = images[0].path
   const url = 'https://cook-site.web.app/product/detail/' + id
 
@@ -134,7 +134,7 @@ const ProductCard = (props: any) => {
           </MenuItem>
         </Menu>
       </CardActions>
-      <ModalBox open={open} modalClose={modalClose} product={props.product} />
+      <ModalBox open={open} modalClose={modalClose} product={product} />
     </Card>
   )
 }

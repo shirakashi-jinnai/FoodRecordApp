@@ -1,6 +1,6 @@
 import { Theme } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import {
   CommentArea,
@@ -9,7 +9,7 @@ import {
   StoresBox,
 } from '../components/Products'
 import { db } from '../firebase'
-import { getProductList } from '../products/selectors'
+import { getProductList } from '../reducks/products/selectors'
 
 const useStyles = makeStyles((theme: Theme) => ({
   swiper: {
@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const ProductDetail = () => {
   const classes = useStyles()
   let id = window.location.pathname.split('/product/detail/')[1]
-  const [product, setProduct] = useState<any>('')
+  const [product, setProduct] = useState<Product | null>()
   const selector = useSelector((state) => state)
   const getProduct = getProductList(selector)
 
@@ -53,10 +53,9 @@ const ProductDetail = () => {
         .get()
         .then((snapshot) => {
           const data = snapshot.data()
-          setProduct(data)
+          setProduct(data as Product)
         })
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getProduct])
 
   return (

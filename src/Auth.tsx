@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { listenAuthState } from './users/operating'
-import { getIssigndin } from './users/selectors'
+import { listenAuthState } from './reducks/users/operating'
+import { getIssigndin } from './reducks/users/selectors'
 
 const Auth = (props: { children: any }) => {
   const dispatch = useDispatch()

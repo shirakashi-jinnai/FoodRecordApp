@@ -1,16 +1,21 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback } from 'react'
 import AddToPhotosIcon from '@material-ui/icons/AddToPhotos'
-import { Icon, IconButton } from '@material-ui/core'
+import { IconButton } from '@material-ui/core'
 import shortid from 'shortid'
 import { storage } from '../../firebase'
 import ImagePreview from './ImagePreview'
 
-const ImageArea = (props: any) => {
+type ImageArea = {
+  images: Image[]
+  setImages: any
+}
+
+const ImageArea = (props: ImageArea) => {
   const deleteImage = useCallback(
     (id) => {
       const result = window.confirm('削除しますか')
       if (result) {
-        const newImages = props.images.filter((image: any) => image.id !== id)
+        const newImages = props.images.filter((image: Image) => image.id !== id)
         props.setImages(newImages)
         storage.ref('images').child(id).delete()
       }
@@ -61,7 +66,7 @@ const ImageArea = (props: any) => {
               />
             ))}
         </div>
-        <IconButton onInput={uploadImage}>
+        <IconButton name="images" onInput={uploadImage}>
           <label>
             <AddToPhotosIcon />
             <input type="file" className="display-none" />

@@ -5,8 +5,11 @@ import { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { FavoriteListItem } from '../components/Products'
 import { db } from '../firebase'
-import { deleteProductsToFavorite, fetchFavoriteList } from '../users/operating'
-import { getUserFavorites, getUserId } from '../users/selectors'
+import {
+  deleteProductsToFavorite,
+  fetchFavoriteList,
+} from '../reducks/users/operating'
+import { getUserFavorites, getUserId } from '../reducks/users/selectors'
 
 const useStyles = makeStyles({
   favoriteArea: {

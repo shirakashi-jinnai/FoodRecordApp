@@ -1,5 +1,5 @@
 import { push } from 'connected-react-router'
-import { db, FirebaseTimestamp, firestore } from '../firebase'
+import { db, FirebaseTimestamp, firestore } from '../../firebase'
 import {
   deleteProductAction,
   fetchProductAction,
@@ -26,7 +26,7 @@ export const addComment = (id, contributor, rating, title, review) => {
   }
 }
 
-export const editProduct = (id) => {
+export const editProduct = (id: string) => {
   return async (dispatch) => {
     productsrRef
       .doc(id)
@@ -38,7 +38,7 @@ export const editProduct = (id) => {
   }
 }
 
-export const deleteProduct = (id) => {
+export const deleteProduct = (id: string) => {
   return async (dispatch, getState) => {
     productsrRef
       .doc(id)

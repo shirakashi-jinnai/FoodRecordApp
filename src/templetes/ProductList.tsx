@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import ProductCard from '../components/Products/ProductCard'
-import { fetchProducts } from '../products/operating'
-import { getProductList } from '../products/selectors'
-import { getUserName } from '../users/selectors'
+import { fetchProducts } from '../reducks/products/operating'
+import { getProductList } from '../reducks/products/selectors'
+import { getUserName } from '../reducks/users/selectors'
 
 const ProductList = () => {
   const dispatch = useDispatch()
@@ -20,7 +20,6 @@ const ProductList = () => {
 
   useEffect(() => {
     dispatch(fetchProducts(category))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query])
 
   return (

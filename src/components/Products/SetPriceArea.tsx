@@ -12,7 +12,7 @@ import {
 import { AddBox, Delete, Edit } from '@material-ui/icons'
 import React, { useCallback, useEffect, useState } from 'react'
 
-const SetPriceArea = (props: any) => {
+const SetPriceArea = (props: { prices: Price[]; setPrices: any }) => {
   const [price, setPrice] = useState(''),
     [size, setSize] = useState(''),
     [index, setIndex] = useState(0)
@@ -28,7 +28,6 @@ const SetPriceArea = (props: any) => {
     (e) => {
       setSize(e.target.value)
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [size],
   )
 
@@ -39,10 +38,7 @@ const SetPriceArea = (props: any) => {
     }
 
     if (props.prices.length === index) {
-      props.setPrices((prevState) => [
-        ...prevState,
-        { size: size, price: price },
-      ])
+      props.setPrices((prevState) => [...prevState, { size, price }])
       // setIndex(props.prices.length)
       // setIndex(index + 1)
     } else {
@@ -55,12 +51,12 @@ const SetPriceArea = (props: any) => {
     setSize('')
   }
 
-  const deletePrices = (index) => {
-    const newPrices = props.prices.filter((item, i) => i !== index)
+  const deletePrices = (index: number) => {
+    const newPrices = props.prices.filter((_, i) => i !== index)
     props.setPrices(newPrices)
   }
 
-  const editPrices = (index) => {
+  const editPrices = (index: number) => {
     setIndex(index)
     const edit = props.prices[index]
     setPrice(edit.price)

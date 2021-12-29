@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   },
 })
 
-const SetStoresArea = (props) => {
+const SetStoresArea = (props: { stores: Store[]; setStores: any }) => {
   const classes = useStyles()
   const [place, setPlace] = useState(''),
     [startTime, setStartTime] = useState(''),
@@ -34,18 +34,14 @@ const SetStoresArea = (props) => {
   const inputPlace = useCallback(
     (e) => {
       setPlace(e.target.value)
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [place],
   )
 
   const inputStartTime = useCallback(
     (e) => {
       setStartTime(e.target.value)
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [startTime],
   )
 
@@ -53,11 +49,15 @@ const SetStoresArea = (props) => {
     (e) => {
       setEndTime(e.target.value)
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [endTime],
   )
 
-  const addStores = (place, startTime, endTime, index) => {
+  const addStores = (
+    place: string,
+    startTime: string,
+    endTime: string,
+    index: number,
+  ) => {
     const newPlace = place ? place : 'no data'
     const newStartTime = startTime ? startTime : 'no data'
     const newEndTime = endTime ? endTime : 'no data'
@@ -83,12 +83,12 @@ const SetStoresArea = (props) => {
     setEndTime('')
   }
 
-  const deleteStores = (index) => {
-    const newStores = props.stores.filter((item, i) => i !== index)
+  const deleteStores = (index: number) => {
+    const newStores = props.stores.filter((_: any, i: number) => i !== index)
     props.setStores(newStores)
   }
 
-  const editStores = (index) => {
+  const editStores = (index: number) => {
     const stores = props.stores[index]
     setIndex(index)
     setPlace(stores.place)

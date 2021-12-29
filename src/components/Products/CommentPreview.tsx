@@ -15,7 +15,7 @@ const useStyles = makeStyles({
   },
 })
 
-const CommentPreview = (props: any) => {
+const CommentPreview = (props: { comment: Comment }) => {
   const classes = useStyles()
   const { contributor, rating, title, review } = props.comment
   return (
