@@ -1,4 +1,5 @@
 interface Comment {
+  id?: string
   contributor: string
   rating: number
   review: string
@@ -55,6 +56,11 @@ interface Favorite {
   timestame: Date
 }
 
+interface Products {
+  list: Product[]
+  searchList: Product[]
+}
+
 interface ProductType {
   category: string
   comments: Comment[]
@@ -69,10 +75,15 @@ interface ProductType {
 }
 
 interface User {
-  avater?: string
-  created_at: Date
-  email: string
-  role: string
-  uid: string
+  favoriteLists: Favorite[]
+  isSigndin: boolean
   username: string
+  id: string
+  signinTime: string
+  avatar?: string
+}
+
+interface InitialState {
+  products: Products
+  users: User
 }

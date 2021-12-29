@@ -99,8 +99,6 @@ const ProductEdit = () => {
   return (
     <section>
       <div className="section-container">
-        {/* <button onClick={() => dispatch(signout())}>logout</button> */}
-
         <h2>登録ページ</h2>
         <ImageArea images={images} setImages={setImages} />
 

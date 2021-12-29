@@ -9,7 +9,16 @@ import {
 
 const productsrRef = db.collection('products')
 
-export const addComment = (id, contributor, rating, title, review) => {
+type com = {
+  id: string
+  contributor: string
+  rating: string
+  title: string
+  review: string
+}
+
+export const addComment = (comment: Comment) => {
+  const { id, contributor, rating, title, review } = comment
   return async (dispatch) => {
     if (!title) {
       alert('タイトルを入力してください')
@@ -52,7 +61,7 @@ export const deleteProduct = (id: string) => {
 }
 
 export const fetchProducts = (category?: any) => {
-  return async (dispatch) => {
+  return async (dispatch: any): Promise<void> => {
     let query = productsrRef.orderBy('updated_at', 'desc')
     query = category ? productsrRef.where('category', '==', category) : query
     query.get().then((snapshots) => {

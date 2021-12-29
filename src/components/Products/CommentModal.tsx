@@ -33,7 +33,7 @@ const useStyles = makeStyles({
   },
 })
 
-type Modal = {
+type CommentModal = {
   handleOpen: () => void
   handleClose: () => void
   open: boolean
@@ -41,7 +41,7 @@ type Modal = {
   userName: string
 }
 
-const CommentModal = (props: Modal) => {
+const CommentModal = (props: CommentModal) => {
   const classes = useStyles()
   const dispatch = useDispatch()
   const [title, setTitle] = useState(''),
@@ -64,7 +64,9 @@ const CommentModal = (props: Modal) => {
 
   const modalClose = useCallback(
     (productId, contributor, rating, title, review) => {
-      dispatch(addComment(productId, contributor, rating, title, review))
+      dispatch(
+        addComment({ id: productId, contributor, rating, title, review }),
+      )
       dispatch(fetchProducts())
       setTitle('')
       setReview('')
