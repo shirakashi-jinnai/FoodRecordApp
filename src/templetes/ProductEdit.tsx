@@ -94,7 +94,6 @@ const ProductEdit = () => {
           console.log(prices?.length)
         })
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

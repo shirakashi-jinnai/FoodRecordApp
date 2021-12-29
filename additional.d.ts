@@ -5,6 +5,14 @@ interface Comment {
   title: string
 }
 
+type CheckBox = {
+  checked?: boolean
+  handlechange: (event: any) => any
+  color?: 'default' | 'primary' | 'secondary'
+  label: string
+  id: string
+}
+
 interface Image {
   id: string
   path: string
