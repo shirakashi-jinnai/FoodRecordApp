@@ -1,5 +1,4 @@
-import { ListItem, ListItemText } from '@material-ui/core'
-import { List } from '@material-ui/icons'
+import { ListItemText } from '@material-ui/core'
 import React from 'react'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/styles'

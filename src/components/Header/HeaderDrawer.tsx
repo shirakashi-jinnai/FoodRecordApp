@@ -1,29 +1,21 @@
 import {
   Divider,
   Drawer,
-  IconButton,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
-  Menu,
 } from '@material-ui/core'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import { push } from 'connected-react-router'
-import React, { useCallback, useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { db } from '../../firebase'
-import { searchProduct } from '../../reducks/products/operating'
-import { getProductList } from '../../reducks/products/selectors'
 import { signout } from '../../reducks/users/operating'
-import { getIssigndin } from '../../reducks/users/selectors'
 
 const HeaderDrawer = (props: any) => {
   const dispatch = useDispatch()
-  const selector = useSelector((state) => state)
-  const isSigndin = getIssigndin(selector)
-  const products = getProductList(selector)
 
   const selectMenu = (e: any, path: any) => {
     dispatch(push(path))

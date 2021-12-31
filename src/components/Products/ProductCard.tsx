@@ -59,7 +59,6 @@ const ProductCard = ({ product }: { product: Product }) => {
 
   const { description, id, images, name, prices } = product
   const image = images[0].path
-  const url = 'https://cook-site.web.app/product/detail/' + id
 
   const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget)

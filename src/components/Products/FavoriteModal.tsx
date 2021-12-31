@@ -39,6 +39,7 @@ type ModalBox = {
   product: Product
 }
 
+// eslint-disable-next-line @typescript-eslint/no-redeclare
 const ModalBox = (props: ModalBox) => {
   const dispatch = useDispatch()
   const classes = useStyles()
