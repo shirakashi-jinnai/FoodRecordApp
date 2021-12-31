@@ -1,18 +1,9 @@
-import {
-  Box,
-  Fade,
-  fade,
-  Modal,
-  TextField,
-  Typography,
-} from '@material-ui/core'
+import { Box, Fade, Modal, TextField, Typography } from '@material-ui/core'
 import { Rating } from '@material-ui/lab'
 import { makeStyles } from '@material-ui/styles'
 import React, { useCallback, useState } from 'react'
-import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { addComment, fetchProducts } from '../../reducks/products/operating'
-import { getUserName } from '../../reducks/users/selectors'
 import ButtonBox from '../Uikit/ButtonBox'
 
 const useStyles = makeStyles({
@@ -41,6 +32,7 @@ type CommentModal = {
   userName: string
 }
 
+// eslint-disable-next-line @typescript-eslint/no-redeclare
 const CommentModal = (props: CommentModal) => {
   const classes = useStyles()
   const dispatch = useDispatch()

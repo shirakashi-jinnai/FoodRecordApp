@@ -9,15 +9,7 @@ import {
 
 const productsrRef = db.collection('products')
 
-type com = {
-  id: string
-  contributor: string
-  rating: string
-  title: string
-  review: string
-}
-
-export const addComment = (comment: Comment) => {
+export const addComment = (comment: Partial<Comment>) => {
   const { id, contributor, rating, title, review } = comment
   return async (dispatch) => {
     if (!title) {

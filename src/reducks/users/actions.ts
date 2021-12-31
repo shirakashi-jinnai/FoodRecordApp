@@ -1,7 +1,7 @@
 import { FirebaseTimestamp } from '../../firebase'
 
 export const USERS_TEST = 'USERS_TEST'
-export const usersTest = (users) => {
+export const usersTest = (users: User) => {
   return {
     type: 'USERS_TEST',
     payload: {
@@ -12,7 +12,7 @@ export const usersTest = (users) => {
 }
 
 export const USERS_LOGIN = 'USERS_LOGIN'
-export const signinAction = (users) => {
+export const signinAction = (users: Users) => {
   //actionはstoreを変更するためにdispatchによって発行される
   const timestamp = FirebaseTimestamp.now()
   return {
@@ -42,7 +42,7 @@ export const usersLogout = () => {
 }
 
 export const ADD_FAVORITELISTS = 'ADD_FAVORITELISTS'
-export const addFavoriteLists = (list) => {
+export const addFavoriteLists = (list: Favorite) => {
   return {
     type: 'ADD_FAVORITELISTS',
     payload: list,
@@ -50,7 +50,7 @@ export const addFavoriteLists = (list) => {
 }
 
 export const ADD_FAVORITEITEM = 'ADD_FAVORITEITEM'
-export const addFavoriteItem = (item) => {
+export const addFavoriteItem = (item: Favorite) => {
   return {
     type: 'ADD_FAVORITEITEM',
     payload: item,
@@ -58,7 +58,7 @@ export const addFavoriteItem = (item) => {
 }
 
 export const DELTE_FAVORITEITEM = 'DELTE_FAVORITEITEM'
-export const deleteFavoriteItem = (item) => {
+export const deleteFavoriteItem = (item: Favorite) => {
   return {
     type: 'DELTE_FAVORITEITEM',
     payload: item,
@@ -66,7 +66,7 @@ export const deleteFavoriteItem = (item) => {
 }
 
 export const UPDATE_PROFILE_ACTION = 'UPDATE_PROFILE_ACTION'
-export const updateProfileAction = (users) => {
+export const updateProfileAction = (users: Partial<User>) => {
   return {
     type: 'UPDATE_PROFILE_ACTION',
     payload: {

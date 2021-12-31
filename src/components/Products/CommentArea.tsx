@@ -5,11 +5,10 @@ import React, { useCallback, useState } from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProducts } from '../../reducks/products/operating'
-import { getProductList } from '../../reducks/products/selectors'
 import { getUserName } from '../../reducks/users/selectors'
 import { CommentModal, CommentPreview } from './index'
 
-const CommentArea = (props: { comments: Comment[] }) => {
+const CommentArea = (props: { comments?: Comment[] }) => {
   const dispatch = useDispatch()
   const productId = window.location.pathname.split('/product/detail/')[1]
   const selector = useSelector((state) => state)

@@ -1,15 +1,15 @@
 import * as Actions from './actions'
 import initialState from '../store/initialState'
 
-type Action = {
-  type: string
-  payload: Product[]
-}
+// type Action = {
+//   type: string
+//   payload: Product[]
+// }
 
 //reducerの役目はactionとoldstateを引数にnewstateを生成する
 export const ProductsReducer = (
   state = initialState.products,
-  action: Action,
+  action: Action<Product[]>,
 ) => {
   switch (action.type) {
     case Actions.FETCH_PRODUCT:

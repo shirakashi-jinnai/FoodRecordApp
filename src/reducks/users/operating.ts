@@ -9,12 +9,12 @@ import {
   usersLogout,
 } from './actions'
 
-export const addFavoriteStock = (stockName) => {
+export const addFavoriteStock = (stockName: string) => {
   return async (dispatch, getState) => {
     if (stockName === '') {
       return alert('リスト名を入力してください')
     }
-    const uid = getState().users.id
+    const uid: string = getState().users.id
     const favoriteRef = db
       .collection('users')
       .doc(uid)
@@ -30,8 +30,8 @@ export const addFavoriteStock = (stockName) => {
   }
 }
 
-export const addProductsToFavorite = (product, listsId) => {
-  return async (dispatch, getState) => {
+export const addProductsToFavorite = (product: Product, listsId: string[]) => {
+  return async (dispatch: any, getState: any) => {
     const uid = getState().users.id
     listsId.forEach((listId) => {
       const favoriteRef = db
@@ -62,10 +62,10 @@ export const deleteUser = () => {
   }
 }
 
-export const deleteProductsToFavorite = (product, listId) => {
-  return async (dispatch, getState) => {
-    const uid = getState().users.id
-    const favoritelists = getState().users.favoriteLists
+export const deleteProductsToFavorite = (product: Product, listId: string) => {
+  return async (dispatch: any, getState: any) => {
+    const uid: string = getState().users.id
+    const favoritelists: Favorite = getState().users.favoriteLists
     const favoriteRef = db
       .collection('users')
       .doc(uid)
@@ -74,17 +74,14 @@ export const deleteProductsToFavorite = (product, listId) => {
     favoriteRef.update({
       favoriteList: firestore.FieldValue.arrayRemove(product),
     })
-    const newFavoriteList = favoritelists[0].favoriteList.filter(
+    const newFavoriteList: Favorite = favoritelists[0].favoriteList.filter(
       (item) => item.id !== product.id,
     )
-    console.log(favoritelists[0])
-    console.log(favoritelists)
-    // console.log(newFavoriteList)
     dispatch(deleteFavoriteItem(newFavoriteList))
   }
 }
 
-export const fetchFavoriteList = (category?: any) => {
+export const fetchFavoriteList = (category?: string) => {
   return async (dispatch, getState) => {
     const uid = getState().users.id
     const favoriteRef = db.collection('users').doc(uid).collection('favorites')
@@ -96,6 +93,7 @@ export const fetchFavoriteList = (category?: any) => {
       let list: any = []
       snapshots.forEach((snapshot) => {
         const data = snapshot.data()
+        console.log(data)
         list.push(data) //category毎のオブジェクトが入っている
       })
       dispatch(addFavoriteLists(list))
@@ -127,16 +125,12 @@ export const listenAuthState = () => {
       } else {
         // No user is signed in.
         dispatch(push('/signup'))
-        // dispatch(signinAction({
-        //     username:'ゲストユーザー',
-        //     uid
-        // }))
       }
     })
   }
 }
 
-export const resetPassword = (email) => {
+export const resetPassword = (email: string) => {
   return async (dispatch) => {
     if (!email) {
       alert('入力してください')
@@ -155,10 +149,10 @@ export const resetPassword = (email) => {
   }
 }
 
-export const update_Profile = (name, avatar) => {
+export const update_Profile = (name: string, avatar: string) => {
   return async (dispatch, getState) => {
     avatar = avatar ? avatar : ''
-    const uid = getState().users.id
+    const uid: string = getState().users.id
     const updateData = { username: name, avatar: avatar }
     db.collection('users')
       .doc(uid)
@@ -170,7 +164,12 @@ export const update_Profile = (name, avatar) => {
   }
 }
 
-export const signup = (username, email, password, confirmpassword) => {
+export const signup = (
+  username: string,
+  email: string,
+  password: string,
+  confirmpassword: string,
+) => {
   return async (dispatch) => {
     if (
       username == '' ||
@@ -217,7 +216,7 @@ export const signup = (username, email, password, confirmpassword) => {
   }
 }
 
-export const signin = (email, password) => {
+export const signin = (email: string, password: string) => {
   if (email === '' || password === '') {
     alert('メールアドレスとパスワードを入力してください')
     return false
@@ -259,7 +258,6 @@ export const signout = () => {
   return async (dispatch, getState) => {
     auth.signOut().then(() => {
       dispatch(usersLogout())
-      // console.log(avatar, signdin)
       dispatch(push('/signin'))
     })
   }

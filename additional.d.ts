@@ -6,6 +6,11 @@ interface Comment {
   title: string
 }
 
+type Action<T> = {
+  type: string
+  payload: T
+}
+
 type CheckBox = {
   checked?: boolean
   handlechange: (event: any) => any
@@ -32,7 +37,7 @@ interface Category {
 
 type Product = {
   category: string
-  comments: Comment[]
+  comments?: Comment[]
   description: string
   id: string
   images: Image[]
@@ -80,6 +85,12 @@ interface User {
   username: string
   id: string
   signinTime: string
+  avatar?: string
+}
+
+interface Users {
+  uid: string
+  username: string
   avatar?: string
 }
 
