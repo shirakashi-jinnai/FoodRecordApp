@@ -8,8 +8,8 @@ import { signin, signout } from '../reducks/users/operating'
 const Signin = () => {
   const dispatch = useDispatch()
 
-  const [email, setEmail] = useState(''),
-    [password, setPassword] = useState('')
+  const [email, setEmail] = useState<string>(''),
+    [password, setPassword] = useState<string>('')
 
   const inputEmail = useCallback(
     (e) => {

@@ -8,10 +8,10 @@ import { getUserName } from '../reducks/users/selectors'
 const ProductList = () => {
   const dispatch = useDispatch()
   const selector: any = useSelector((state) => state)
-  const products = getProductList(selector)
-  const username = getUserName(selector)
+  const products: Product[] = getProductList(selector)
+  const username: string = getUserName(selector)
 
-  const query = selector.router.location.search //?の後のpathを表示する
+  const query: string = selector.router.location.search //?の後のpathを表示する
   // const q = window.location.search//これでも可
 
   const category = /^\?category=/.test(query)

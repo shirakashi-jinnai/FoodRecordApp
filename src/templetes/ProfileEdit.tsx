@@ -1,4 +1,4 @@
-import { Avatar, IconButton, Modal, TextField } from '@material-ui/core'
+import { Avatar, IconButton, TextField } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 import React from 'react'
 import { useCallback } from 'react'
@@ -6,12 +6,7 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { ButtonBox } from '../components/Uikit'
 import { storage } from '../firebase'
-import {
-  getUserAvatar,
-  getUserId,
-  getUserName,
-} from '../reducks/users/selectors'
-import image from '../asetts/img/building.png'
+import { getUserAvatar, getUserName } from '../reducks/users/selectors'
 import shortid from 'shortid'
 import { deleteUser, update_Profile } from '../reducks/users/operating'
 
@@ -31,17 +26,13 @@ const ProfileEdit = () => {
   const dispatch = useDispatch()
   const classes = useStyles()
   const selector = useSelector((state) => state)
-  const uid = getUserId(selector)
   const useravatar = getUserAvatar(selector)
   const username = getUserName(selector)
-  const [name, setName] = useState(username),
-    [avatar, setAavatar] = useState(useravatar),
-    [open, setOpen] = useState(false)
-  console.log(avatar)
+  const [name, setName] = useState<string>(username),
+    [avatar, setAavatar] = useState<string>(useravatar)
 
   const handleClick = useCallback(() => {
     const result = window.confirm('アカウントを削除しますか？')
-    console.log(result)
     result && dispatch(deleteUser())
   }, [])
 

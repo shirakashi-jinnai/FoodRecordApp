@@ -56,7 +56,7 @@ const ProductDetail = () => {
           setProduct(data as Product)
         })
     }
-  }, [getProduct])
+  }, [getProduct, id])
 
   return (
     <section className="section-wrapin">

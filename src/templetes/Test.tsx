@@ -1,14 +1,8 @@
 import { push } from 'connected-react-router'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { signinAction, usersTest, usersLogout } from '../reducks/users/actions'
 import { signout } from '../reducks/users/operating'
-import {
-  getLoginTIme,
-  getUserId,
-  getUserName,
-} from '../reducks/users/selectors'
-import ProductEdit from './ProductEdit'
+import { getUserId, getUserName } from '../reducks/users/selectors'
 
 const Test = () => {
   const dispatch = useDispatch()

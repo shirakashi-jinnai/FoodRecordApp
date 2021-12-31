@@ -17,7 +17,8 @@ const ProductEdit = () => {
   }
 
   const [product, setProduct] = useReducer(
-    (state: any, data: any) => _.merge({}, state, data),
+    (state: Partial<Product>, data: Partial<Product>) =>
+      _.merge({}, state, data),
     {
       name: '',
       images: [],
@@ -33,9 +34,9 @@ const ProductEdit = () => {
     [images, setImages] = useState<Image[]>([]),
     [description, setDescription] = useState(''),
     [category, setCategory] = useState(''),
-    [prices, setPrices] = useState([]),
+    [prices, setPrices] = useState<any[]>([]),
     [storeName, setStoreName] = useState(''),
-    [stores, setStores] = useState([])
+    [stores, setStores] = useState<any>([])
 
   const onValueChange = ({ target }) =>
     setProduct({ [target.name]: target.value })
@@ -83,7 +84,7 @@ const ProductEdit = () => {
         .doc(id)
         .get()
         .then((snapshot) => {
-          const data = snapshot.data()
+          const data = snapshot.data() as Product
           setName(data?.name)
           setCategory(data?.category)
           setDescription(data?.description)

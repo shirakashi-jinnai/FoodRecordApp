@@ -9,9 +9,7 @@ import {
 import { Delete } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/styles'
 import { push } from 'connected-react-router'
-import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { db } from '../../firebase'
 
 const useStyles = makeStyles((theme: Theme) => ({
   listItem: {

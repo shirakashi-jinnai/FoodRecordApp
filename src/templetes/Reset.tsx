@@ -1,13 +1,13 @@
 import { TextField } from '@material-ui/core'
 import { push } from 'connected-react-router'
-import React, { useCallback, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { ButtonBox } from '../components/Uikit'
 import { resetPassword } from '../reducks/users/operating'
 
 const Reset = () => {
   const dispatch = useDispatch()
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState<string>('')
 
   const inputEmail = useCallback(
     (e) => {

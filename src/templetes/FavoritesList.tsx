@@ -28,13 +28,12 @@ const FavoritesList = () => {
   const dispatch = useDispatch()
   const selector = useSelector((state) => state)
   const favoriteLists = getUserFavorites(selector)
-  const uid = getUserId(selector)
-  const query = window.location.search
+  const uid: string = getUserId(selector)
   // const category = /^\?category=/.test(query) ? query.split('?category=')[1] : "";このやり方でもできる
   const category = window.location.search.split('?category=')[1]
   const [favoCategories, setFavoCategories] = useState<any>([])
 
-  const deleteFavorite = useCallback((product, listId) => {
+  const deleteFavorite = useCallback((product: Product, listId: string) => {
     dispatch(deleteProductsToFavorite(product, listId))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -81,7 +80,7 @@ const FavoritesList = () => {
         <List className={classes.main}>
           {favoriteLists.length > 0 ? (
             favoriteLists.map((
-              list, //お気に入りリスト
+              list: Favorite, //お気に入りリスト
             ) =>
               list.favoriteList.map((
                 item,

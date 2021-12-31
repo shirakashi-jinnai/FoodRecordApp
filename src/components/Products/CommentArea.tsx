@@ -1,6 +1,4 @@
-import { Button, List, ListItemText, Modal } from '@material-ui/core'
-import { makeStyles } from '@material-ui/styles'
-import { push } from 'connected-react-router'
+import { Button, List } from '@material-ui/core'
 import React, { useCallback, useState } from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
